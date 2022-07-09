@@ -6,6 +6,18 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    container: {
+      center: true,
+      padding: '2rem',
+    },
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'black': '#000',
+      'white': '#ffffff',
+      'yellow': '#ffba00',
+      'grey': '#9ca3af',
+    },
   },
   plugins: [],
 }
