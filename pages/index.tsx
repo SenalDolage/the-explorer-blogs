@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import DefaultLayout from "../layouts/default-layout";
+import { BlogCard } from "../components";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,16 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div></div>
+          </div>
+        </div>
+
+        {/* Blog Posts list */}
+        <div className="blog-card-list my-10 lg:my-14">
+          <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
           </div>
         </div>
 
