@@ -7,7 +7,7 @@ type Props = {
 
 export default function Header({ title }: Props) {
     return (
-        <header className="header sticky top-0 left-0 w-full bg-white py-6">
+        <header className="header sticky top-0 left-0 w-full bg-white py-6 overflow-hidden shadow-lg">
             <Head>
                 <title> {title} | The Explorer Blogs</title>
                 <link rel="icon" href="/favicon.ico" />
