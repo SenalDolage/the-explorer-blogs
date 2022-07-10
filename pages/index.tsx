@@ -1,9 +1,16 @@
-import type { NextPage } from 'next'
-import Image from 'next/image'
 import DefaultLayout from "../layouts/default-layout";
 import { BlogCard } from "../components";
+import { sanityClient } from '../sanity';
+import { Post } from '../models/post';
+import Link from 'next/link';
 
-const Home: NextPage = () => {
+type Props = {
+  posts: Post[];
+}
+
+export default function Home({ posts }: Props) {
+  console.log(posts);
+
   return (
     <div className="home">
       <DefaultLayout pageTitle="Home">
@@ -25,11 +32,14 @@ const Home: NextPage = () => {
 
         {/* Blog Posts list */}
         <div className="blog-card-list my-10 lg:my-14">
-          <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+          <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-center">
+            {posts.map(post => (
+              <Link key={post._id} href={post.slug}>
+                <a>
+                  <BlogCard post={post} />
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -38,4 +48,28 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export const getServerSideProps = async () => {
+  const query = `*[_type == "post"] {
+    _id,
+    title,
+    "slug": slug.current,
+    body,
+    mainImage,
+    publishedAt,
+    categories[] -> {
+      title,
+      slug
+    },
+    author -> {
+      name,
+      image
+    }
+  }`;
+
+  const posts = await sanityClient.fetch(query);
+  return {
+    props: {
+      posts,
+    }
+  }
+}
