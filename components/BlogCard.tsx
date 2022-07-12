@@ -24,7 +24,7 @@ export default function BlogCard({ post }: Props) {
                     <div className="pt-2">
                         <span className="italic text-sm">Categories: </span>
                         {post.categories.map(cat => (
-                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                            <span key={cat.title} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700">
                                 #{cat.title}
                             </span>
                         ))}

@@ -9,12 +9,9 @@ type Props = {
 }
 
 export default function Home({ posts }: Props) {
-  console.log(posts);
-
   return (
     <div className="home">
       <DefaultLayout pageTitle="Home">
-
         {/* Hero Banner */}
         <div className="hero-banner bg-yellow py-20 lg:py-6 min-h-[250px] lg:min-h-[400px] flex items-center w-full">
           <div className="hero-banner-inner container grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
@@ -34,7 +31,7 @@ export default function Home({ posts }: Props) {
         <div className="blog-card-list my-10 lg:my-14">
           <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-center">
             {posts.map(post => (
-              <Link key={post._id} href={post.slug}>
+              <Link key={post._id} href={`post/${post.slug}`}>
                 <a>
                   <BlogCard post={post} />
                 </a>
@@ -44,7 +41,6 @@ export default function Home({ posts }: Props) {
 
           {posts.length === 0 ? <div className="w-full text-center container">No Posts</div> : ''}
         </div>
-
       </DefaultLayout>
     </div>
   )
@@ -73,5 +69,5 @@ export const getServerSideProps = async () => {
     props: {
       posts,
     }
-  }
-}
+  };
+};
