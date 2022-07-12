@@ -41,6 +41,8 @@ export default function Home({ posts }: Props) {
               </Link>
             ))}
           </div>
+
+          {posts.length !== 0 ? <div className="w-full text-center container">No Posts</div> : ''}
         </div>
 
       </DefaultLayout>
